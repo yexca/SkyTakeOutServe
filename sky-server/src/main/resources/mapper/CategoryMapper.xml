@@ -6,10 +6,10 @@
     <select id="pageQuery" resultType="com.sky.entity.Category">
         select * from category
         <where>
-            <if test="name != null">name = #{name}</if>
+            <if test="name != null">name like concat('%',#{name},'%')</if>
             <if test="type != null">and type = #{type}</if>
         </where>
-        order by update_time desc
+        order by sort
     </select>
 
     <update id="update">
