@@ -68,14 +68,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     /*
-    * 新增员工
-    * @Param employeeDTO
-    * */
+     * 新增员工
+     * @Param employeeDTO
+     * */
     @Override
     public void save(EmployeeDTO employeeDTO) {
         Employee e = new Employee();
         // 对象属性拷贝
-        BeanUtils.copyProperties(employeeDTO,e);
+        BeanUtils.copyProperties(employeeDTO, e);
         // 设置账号状态，默认正常
         e.setStatus(StatusConstant.ENABLE);
         // 设置密码
@@ -92,6 +92,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
@@ -104,5 +105,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records = page.getResult();
 
         return new PageResult(total, records);
+    }
+
+    /**
+     * 启用禁用员工账号
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // update employee set status = ? where id = ?
+
+//        Employee employee = new Employee();
+//        employee.setId(id);
+//        employee.setStatus(status);
+
+        // 使用构建器
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .updateTime(LocalDateTime.now())
+                .updateUser(BaseContext.getCurrentId())
+                .build();
+
+        employeeMapper.update(employee);
     }
 }
