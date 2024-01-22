@@ -24,4 +24,18 @@
         </where>
         order by d.create_time desc
     </select>
+    <update id="update">
+        update dish
+        <set>
+            <if test="name!=null">name = #{name},</if>
+            <if test="categoryId!=null">name = #{categoryId},</if>
+            <if test="price!=null">name = #{price},</if>
+            <if test="image!=null">name = #{image},</if>
+            <if test="description!=null">name = #{description},</if>
+            <if test="status!=null">name = #{status},</if>
+            <if test="updateUser!=null">name = #{updateUser},</if>
+            <if test="updateTime!=null">name = #{updateTime},</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
