@@ -11,3 +11,8 @@ sky:
     access-key-id: your_id
     access-key-secret: your_ secret
     bucket-name: name
+  redis:
+    host: localhost
+    port: 6379
+    # password
+    database: 0
