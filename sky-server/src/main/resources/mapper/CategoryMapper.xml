@@ -11,6 +11,23 @@
         </where>
         order by sort
     </select>
+    <select id="list" resultType="com.sky.entity.Category">
+        select * from category
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 
     <update id="update">
         update category
